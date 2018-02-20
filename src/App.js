@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Expert from './Expert';
+import User from './User';
 
 class App extends Component {
+  state = {
+    isExpertMode: true,
+  }
+  changeMode = (isExpertMode) => {
+    this.setState({ isExpertMode });
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div>
+        Change mode:
+        <button onClick={() => this.changeMode(true)}>Expert</button>
+        <button onClick={() => this.changeMode(false)}>User</button>
+        </div>
+        {this.state.isExpertMode ? <Expert/> : <User/>}
       </div>
     );
   }
