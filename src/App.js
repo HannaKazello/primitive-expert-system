@@ -5,9 +5,13 @@ import User from './User';
 class App extends Component {
   state = {
     isExpertMode: true,
+    expertModeInfo: {},
   }
   changeMode = (isExpertMode) => {
     this.setState({ isExpertMode });
+  }
+  completeExpertMode = (info) => {
+    this.setState({ expertModeInfo: info });
   }
   render() {
     return (
@@ -17,7 +21,10 @@ class App extends Component {
         <button onClick={() => this.changeMode(true)}>Expert</button>
         <button onClick={() => this.changeMode(false)}>User</button>
         </div>
-        {this.state.isExpertMode ? <Expert/> : <User/>}
+        {this.state.isExpertMode
+          ? <Expert completeExpertMode={this.completeExpertMode}/>
+          : <User expertModeInfo={this.state.expertModeInfo}/>
+        }
       </div>
     );
   }
